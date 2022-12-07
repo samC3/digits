@@ -48,6 +48,10 @@ defmodule Digits.MixProject do
       {:gettext, "~> 0.20"},
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"},
+      {:nx, "~> 0.4.0"},
+      {:scidata, "~> 0.1.9"},
+      {:exla, "~> 0.4.0"},
+      {:axon, "~> 0.3.0"}
     ]
   end
 
