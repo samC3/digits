@@ -33,7 +33,7 @@ defmodule Digits.Model do
     |> Axon.Loop.trainer(:categorical_cross_entropy, Axon.Optimizers.adam(0.01))
     |> Axon.Loop.metric(:accuracy, "Accuracy")
     |> Axon.Loop.validate(model, validation_data)
-    |> Axon.Loop.run(training_data, %{})
+    |> Axon.Loop.run(training_data, %{}, epochs: 10)
   end
 
   def test(model, state, test_data) do
