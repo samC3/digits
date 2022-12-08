@@ -44,7 +44,7 @@ defmodule Digits.Model do
   end
 
   def save!(model, state) do
-    contents = :erlang.term_to_binary({model, state})
+    contents = Axon.serialize(model, state)
 
     File.write!(path(), contents)
   end
@@ -52,7 +52,7 @@ defmodule Digits.Model do
   def load! do
     path()
     |> File.read!()
-    |> :erlang.binary_to_term()
+    |> Axon.deserialize()
   end
 
   def path do
