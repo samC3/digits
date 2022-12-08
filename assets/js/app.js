@@ -31,7 +31,7 @@ Hooks.Draw = {
     this.draw = new Draw(this.el, 384, 384, {
       backgroundColor: "black",
       strokeColor: "white",
-      strokeWeight: 50
+      strokeWeight: 30
     })
 
     this.handleEvent("reset", () => {
