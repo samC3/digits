@@ -58,4 +58,27 @@ defmodule Digits.Model do
   def path do
     Path.join(Application.app_dir(:digits, "priv"), "model.axon")
   end
+
+  def predict(path) do
+    {:ok, img_binary} = File.read!(path) |> Image.from_binary()
+    {img, _img_alpha_band} = Image.split_alpha(img_binary)
+
+    {:ok, tensor} =
+      Image.to_colorspace!(img, :grey16)
+      |> Image.resize!(0.073)
+      |> Image.to_nx()
+
+    data =
+      tensor
+      |> Nx.reshape({1, 28, 28})
+      |> List.wrap()
+      |> Nx.stack()
+
+    {model, state} = load!()
+
+    model
+    |> Axon.predict(state, data)
+    |> Nx.argmax()
+    |> Nx.to_number()
+  end
 end
